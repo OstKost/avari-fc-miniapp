@@ -13,7 +13,7 @@ npm install
 npm run dev
 ```
 
-Откройте [http://127.0.0.1:43123](http://127.0.0.1:43123). Ширина 360px — основной размер, на широком экране колонка остаётся узкой.
+Откройте [http://127.0.0.1:43123/avari-fc-miniapp/](http://127.0.0.1:43123/avari-fc-miniapp/). Ширина 360px — основной размер, на широком экране колонка остаётся узкой.
 
 Проверки:
 
@@ -27,17 +27,9 @@ npm run preview
 
 ## Деплой
 
-Подойдёт любой статический HTTPS-хост. В `vite.config.js` стоит `base: "./"`, поэтому приложение работает и в корне домена, и в подкаталоге.
+Сайт публикуется на GitHub Pages по адресу [https://ostkost.github.io/avari-fc-miniapp/](https://ostkost.github.io/avari-fc-miniapp/). В `vite.config.js` задан `base: "/avari-fc-miniapp/"`. Гербы, аватар, `schedule.json` и собранные шрифты запрашиваются от этого префикса (`import.meta.env.BASE_URL` и `%BASE_URL%`). Файл `.ics` собирается в браузере и скачивается локально, отдельного адреса на хосте у него нет.
 
-**Vercel.** Импортируйте репозиторий. Framework Preset — Vite, команда сборки `npm run build`, каталог `dist`. Переменные окружения не нужны.
-
-**GitHub Pages.** В настройках репозитория выберите GitHub Actions или ветку со статикой. Локально:
-
-```bash
-npm run build
-```
-
-Содержимое `dist/` — это весь сайт: `index.html`, `assets/`, `data/schedule.json`, `crests/`, `avatar.jpg`.
+Пуш в ветку `main` репозитория [OstKost/avari-fc-miniapp](https://github.com/OstKost/avari-fc-miniapp) запускает `.github/workflows/pages.yml`: `npm ci`, `npm run build`, публикация каталога `dist`. Источник Pages — GitHub Actions. Токен бота для деплоя не нужен.
 
 Адрес должен быть `https://`. Telegram не откроет мини-приложение по `http://`, кроме особых случаев в клиенте разработчика.
 
