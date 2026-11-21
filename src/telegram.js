@@ -3,14 +3,39 @@ import { shareText } from "./ics.js";
 const CHANNEL = "https://t.me/AvariFC";
 
 export function telegramApp() {
-  return window.Telegram?.WebApp ?? null;
+  try {
+    return window.Telegram?.WebApp ?? null;
+  } catch {
+    return null;
+  }
 }
 
 export function inTelegram() {
-  const tg = telegramApp();
-  if (!tg) return false;
-  if (tg.initData) return true;
-  return Boolean(tg.platform && tg.platform !== "unknown");
+  try {
+    const tg = telegramApp();
+    if (!tg) return false;
+    if (tg.initData) return true;
+    return Boolean(tg.platform && tg.platform !== "unknown");
+  } catch {
+    return false;
+  }
+}
+
+function supports(version) {
+  try {
+    const tg = telegramApp();
+    return typeof tg?.isVersionAtLeast === "function" && Boolean(tg.isVersionAtLeast(version));
+  } catch {
+    return false;
+  }
+}
+
+function invoke(fn) {
+  try {
+    fn();
+  } catch {
+    /* older clients */
+  }
 }
 
 const DARK = {
@@ -53,91 +78,111 @@ function paint(vars) {
 }
 
 export function applyBrandTheme() {
-  document.documentElement.dataset.theme = "dark";
-  document.documentElement.style.colorScheme = "dark";
-  paint(DARK);
-}
-
-export function applyTelegramTheme() {
-  const tg = telegramApp();
-  if (!tg) return;
-  const scheme = tg.colorScheme === "light" ? "light" : "dark";
-  const base = scheme === "light" ? LIGHT : DARK;
-  const params = tg.themeParams ?? {};
-  const next = { ...base };
-  if (params.bg_color) next["--bg"] = params.bg_color;
-  if (params.secondary_bg_color) next["--surface"] = params.secondary_bg_color;
-  if (params.section_bg_color) next["--surface-2"] = params.section_bg_color;
-  if (params.text_color) next["--text"] = params.text_color;
-  if (params.hint_color) next["--muted"] = params.hint_color;
-  if (params.subtitle_text_color) next["--faint"] = params.subtitle_text_color;
-  if (params.link_color) next["--link"] = params.link_color;
-  if (params.button_color) next["--accent"] = params.button_color;
-  if (params.button_text_color) next["--accent-ink"] = params.button_text_color;
-  if (params.destructive_text_color) next["--danger"] = params.destructive_text_color;
-  document.documentElement.dataset.theme = scheme;
-  document.documentElement.style.colorScheme = scheme;
-  paint(next);
   try {
-    tg.setHeaderColor(params.header_bg_color || params.bg_color || next["--bg"]);
-    tg.setBackgroundColor(params.bg_color || next["--bg"]);
-  } catch {
-    /* older clients */
-  }
-}
-
-export function initTelegram(handlers) {
-  const tg = telegramApp();
-  if (tg) {
-    tg.ready();
-    tg.expand();
-    try {
-      tg.disableVerticalSwipes();
-    } catch {
-      /* optional */
-    }
-  }
-  if (inTelegram()) {
-    applyTelegramTheme();
-    tg.onEvent("themeChanged", applyTelegramTheme);
-    tg.BackButton.onClick(() => handlers.onBack());
-    tg.MainButton.onClick(() => handlers.onMain());
-  } else {
-    applyBrandTheme();
-  }
-}
-
-export function syncChrome(spec, nested) {
-  const tg = telegramApp();
-  if (!inTelegram() || !tg) return;
-  if (nested) tg.BackButton.show();
-  else tg.BackButton.hide();
-  if (!spec) {
-    tg.MainButton.hide();
-    return;
-  }
-  tg.MainButton.setParams({
-    text: spec.text,
-    is_visible: true,
-  });
-}
-
-export function haptic(kind) {
-  const feedback = telegramApp()?.HapticFeedback;
-  if (!inTelegram() || !feedback) return;
-  try {
-    if (kind === "select") feedback.selectionChanged();
-    else if (kind === "success") feedback.notificationOccurred("success");
-    else feedback.impactOccurred(kind === "medium" ? "medium" : "light");
+    document.documentElement.dataset.theme = "dark";
+    document.documentElement.style.colorScheme = "dark";
+    paint(DARK);
   } catch {
     /* ignore */
   }
 }
 
+export function applyTelegramTheme() {
+  try {
+    const tg = telegramApp();
+    if (!tg) return;
+    const scheme = tg.colorScheme === "light" ? "light" : "dark";
+    const base = scheme === "light" ? LIGHT : DARK;
+    const params = tg.themeParams ?? {};
+    const next = { ...base };
+    if (params.bg_color) next["--bg"] = params.bg_color;
+    if (params.secondary_bg_color) next["--surface"] = params.secondary_bg_color;
+    if (params.section_bg_color) next["--surface-2"] = params.section_bg_color;
+    if (params.text_color) next["--text"] = params.text_color;
+    if (params.hint_color) next["--muted"] = params.hint_color;
+    if (params.subtitle_text_color) next["--faint"] = params.subtitle_text_color;
+    if (params.link_color) next["--link"] = params.link_color;
+    if (params.button_color) next["--accent"] = params.button_color;
+    if (params.button_text_color) next["--accent-ink"] = params.button_text_color;
+    if (params.destructive_text_color) next["--danger"] = params.destructive_text_color;
+    document.documentElement.dataset.theme = scheme;
+    document.documentElement.style.colorScheme = scheme;
+    paint(next);
+    if (!supports("6.1")) return;
+    invoke(() => tg.setHeaderColor(params.header_bg_color || params.bg_color || next["--bg"]));
+    invoke(() => tg.setBackgroundColor(params.bg_color || next["--bg"]));
+  } catch {
+    applyBrandTheme();
+  }
+}
+
+export function initTelegram(handlers) {
+  const tg = telegramApp();
+  if (tg && supports("6.0")) {
+    invoke(() => tg.ready());
+    invoke(() => tg.expand());
+  }
+  if (tg && supports("7.7")) invoke(() => tg.disableVerticalSwipes());
+  if (!tg || !inTelegram()) {
+    applyBrandTheme();
+    return;
+  }
+  applyTelegramTheme();
+  if (!supports("6.1")) return;
+  invoke(() => tg.onEvent("themeChanged", applyTelegramTheme));
+  invoke(() => tg.BackButton?.onClick(() => handlers.onBack()));
+  invoke(() => tg.MainButton?.onClick(() => handlers.onMain()));
+}
+
+export function syncChrome(spec, nested) {
+  if (!inTelegram() || !supports("6.1")) return;
+  const tg = telegramApp();
+  if (!tg) return;
+  invoke(() => {
+    const back = tg.BackButton;
+    const main = tg.MainButton;
+    if (!back || !main) return;
+    if (nested) back.show();
+    else back.hide();
+    if (!spec) {
+      main.hide();
+      return;
+    }
+    try {
+      main.setParams({ text: spec.text, is_visible: true });
+    } catch {
+      main.setText(spec.text);
+      main.show();
+    }
+  });
+}
+
+export function haptic(kind) {
+  if (!inTelegram() || !supports("6.1")) return;
+  invoke(() => {
+    const feedback = telegramApp()?.HapticFeedback;
+    if (!feedback) return;
+    if (kind === "select") feedback.selectionChanged();
+    else if (kind === "success") feedback.notificationOccurred("success");
+    else feedback.impactOccurred(kind === "medium" ? "medium" : "light");
+  });
+}
+
+function openExternalUrl(url) {
+  window.open(url, "_blank", "noopener,noreferrer");
+}
+
 function openTelegramLink(url) {
   const tg = telegramApp();
-  if (inTelegram() && tg?.openTelegramLink) tg.openTelegramLink(url);
-  else window.open(url, "_blank", "noopener,noreferrer");
+  if (inTelegram() && supports("6.1") && typeof tg?.openTelegramLink === "function") {
+    try {
+      tg.openTelegramLink(url);
+      return;
+    } catch {
+      /* older clients */
+    }
+  }
+  openExternalUrl(url);
 }
 
 export function openChannel() {
@@ -146,8 +191,15 @@ export function openChannel() {
 
 export function openExternal(url) {
   const tg = telegramApp();
-  if (inTelegram() && tg?.openLink) tg.openLink(url);
-  else window.open(url, "_blank", "noopener,noreferrer");
+  if (inTelegram() && supports("6.1") && typeof tg?.openLink === "function") {
+    try {
+      tg.openLink(url);
+      return;
+    } catch {
+      /* older clients */
+    }
+  }
+  openExternalUrl(url);
 }
 
 export function shareMatch(match) {

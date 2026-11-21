@@ -82,10 +82,28 @@ export function featuredMatch(matches, now = Date.now()) {
   return { match, phase: phaseOf(match, now) };
 }
 
-export async function loadSchedule() {
-  const response = await fetch(`${import.meta.env.BASE_URL}data/schedule.json`);
-  if (!response.ok) throw new Error("http");
-  const data = await response.json();
-  if (!Array.isArray(data)) throw new Error("format");
-  return data.slice().sort(compareMatches);
+export const SCHEDULE_TIMEOUT_MS = 10_000;
+
+function buildId() {
+  return typeof __AVARI_BUILD__ === "string" && __AVARI_BUILD__ ? __AVARI_BUILD__ : "dev";
+}
+
+function scheduleUrl(build) {
+  const base = import.meta.env?.BASE_URL || "/";
+  const prefix = base.endsWith("/") ? base : `${base}/`;
+  return `${prefix}data/schedule.json?v=${encodeURIComponent(build || buildId())}`;
+}
+
+export async function loadSchedule({ timeoutMs = SCHEDULE_TIMEOUT_MS, build = "" } = {}) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetch(scheduleUrl(build), { signal: controller.signal });
+    if (!response.ok) throw new Error("http");
+    const data = await response.json();
+    if (!Array.isArray(data)) throw new Error("format");
+    return data.slice().sort(compareMatches);
+  } finally {
+    clearTimeout(timer);
+  }
 }

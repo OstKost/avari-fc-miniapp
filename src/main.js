@@ -3,7 +3,7 @@ import manifest from "./crest-manifest.json";
 import { buildCalendar, downloadText, fileSlug } from "./ics.js";
 import { renderApp, shiftMonth, updateCountdowns } from "./render.js";
 import { applyFilter, compareMatches, featuredMatch, isOnCalendarList, loadSchedule, moscowParts } from "./schedule.js";
-import { loadPrefs, savePrefs } from "./storage.js";
+import { loadPrefs, savePrefs, syncCloudPrefs } from "./storage.js";
 import { teamBySheetName, TEAMS } from "./teams.js";
 import {
   haptic,
@@ -35,6 +35,11 @@ const state = {
 
 let depth = 0;
 let booted = false;
+let bootGeneration = 0;
+
+function prefsStamp() {
+  return JSON.stringify([state.filter, state.favourites]);
+}
 
 function parseHash(hash) {
   const raw = hash.replace(/^#\/?/, "");
@@ -283,28 +288,58 @@ window.addEventListener("hashchange", () => {
   render();
 });
 
-async function boot() {
-  state.status = "loading";
-  render();
+async function adoptCloudPrefs(generation, stamp) {
   try {
-    const [matches, prefs] = await Promise.all([loadSchedule(), loadPrefs()]);
+    const cloud = await syncCloudPrefs();
+    if (!cloud || generation !== bootGeneration || state.status !== "ready") return;
+    if (prefsStamp() !== stamp) return;
+    const next = {
+      filter: cloud.filter ?? state.filter,
+      favourites: cloud.favourites ?? state.favourites,
+    };
+    if (JSON.stringify([next.filter, next.favourites]) === stamp) return;
+    state.filter = next.filter;
+    state.favourites = next.favourites;
+    savePrefs(next, { cloud: false });
+    state.keepScroll = true;
+    render();
+  } catch {
+    /* cloud settings are optional */
+  }
+}
+
+async function boot() {
+  const generation = ++bootGeneration;
+  state.status = "loading";
+  state.error = "";
+  render();
+  const prefs = loadPrefs();
+  try {
+    const matches = await loadSchedule();
+    if (generation !== bootGeneration) return;
     state.matches = matches;
     state.filter = prefs.filter ?? allTeams.slice();
     state.favourites = prefs.favourites ?? [];
     state.status = "ready";
   } catch {
+    if (generation !== bootGeneration) return;
     state.status = "error";
-    state.error = "Не удалось загрузить расписание. Проверьте файл data/schedule.json и обновите страницу.";
+    state.error = "Не удалось загрузить расписание. Проверьте соединение и нажмите «Повторить».";
   }
   render();
+  if (state.status === "ready") void adoptCloudPrefs(generation, prefsStamp());
 }
 
 let lastFeatured = "";
 
-initTelegram({
-  onBack: goBack,
-  onMain: () => state.onMain?.(),
-});
+try {
+  initTelegram({
+    onBack: goBack,
+    onMain: () => state.onMain?.(),
+  });
+} catch {
+  /* old client */
+}
 applyRoute();
 boot();
 
