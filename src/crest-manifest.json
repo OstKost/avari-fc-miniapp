@@ -1,0 +1,236 @@
+{
+  "arsenal": {
+    "name": "Арсенал",
+    "file": "arsenal.svg",
+    "page": "https://en.wikipedia.org/wiki/Arsenal_F.C.",
+    "filePage": "https://en.wikipedia.org/wiki/File:Arsenal_FC.svg"
+  },
+  "barcelona": {
+    "name": "Барселона",
+    "file": "barcelona.svg",
+    "page": "https://en.wikipedia.org/wiki/FC_Barcelona",
+    "filePage": "https://en.wikipedia.org/wiki/File:FC_Barcelona_%28crest%29.svg"
+  },
+  "real": {
+    "name": "Реал Мадрид",
+    "file": "real.svg",
+    "page": "https://en.wikipedia.org/wiki/Real_Madrid_CF",
+    "filePage": "https://en.wikipedia.org/wiki/File:Real_Madrid_CF.svg"
+  },
+  "galatasaray": {
+    "name": "Галатасарай",
+    "file": "galatasaray.svg",
+    "page": "https://en.wikipedia.org/wiki/Galatasaray_S.K._(football)",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Galatasaray_S.K._Logo_2026_5-stars.svg"
+  },
+  "rostov": {
+    "name": "Ростов",
+    "file": "rostov.png",
+    "page": "https://en.wikipedia.org/wiki/FC_Rostov",
+    "filePage": "https://en.wikipedia.org/wiki/File:FC_Rostov_logo.svg"
+  },
+  "psg": {
+    "name": "ПСЖ",
+    "file": "psg.svg",
+    "page": "https://en.wikipedia.org/wiki/Paris_Saint-Germain_FC",
+    "filePage": "https://en.wikipedia.org/wiki/File:Paris_Saint-Germain_F.C..svg"
+  },
+  "spain": {
+    "name": "сборная Испании",
+    "file": "spain.svg",
+    "page": "https://en.wikipedia.org/wiki/Spain_national_football_team",
+    "filePage": "https://en.wikipedia.org/wiki/File:Spain_national_football_team_crest.svg"
+  },
+  "france": {
+    "name": "сборная Франции",
+    "file": "france.svg",
+    "page": "https://en.wikipedia.org/wiki/France_national_football_team",
+    "filePage": "https://en.wikipedia.org/wiki/File:France_national_football_team_seal.svg"
+  },
+  "italy": {
+    "name": "Италия",
+    "file": "italy.svg",
+    "page": "https://en.wikipedia.org/wiki/Italy_national_football_team",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Logo_Italy_National_Football_Team_-_2023.svg"
+  },
+  "england": {
+    "name": "Англия",
+    "file": "england.svg",
+    "page": "https://en.wikipedia.org/wiki/England_national_football_team",
+    "filePage": "https://en.wikipedia.org/wiki/File:England_national_football_team_crest.svg"
+  },
+  "czechia": {
+    "name": "Чехия",
+    "file": "czechia.svg",
+    "page": "https://en.wikipedia.org/wiki/Czech_Republic_national_football_team",
+    "filePage": "https://en.wikipedia.org/wiki/File:Czech_Republic_national_football_team_logo.svg"
+  },
+  "turkey": {
+    "name": "Турция",
+    "file": "turkey.png",
+    "page": "https://en.wikipedia.org/wiki/Turkey_national_football_team",
+    "filePage": "https://commons.wikimedia.org/wiki/File:T%C3%BCrk_mill%C3%AE_tak%C4%B1mlar_g%C3%B6%C4%9F%C3%BCs_armas%C4%B1.png"
+  },
+  "krylia": {
+    "name": "Крылья Советов",
+    "file": "krylia.svg",
+    "page": "https://en.wikipedia.org/wiki/PFC_Krylia_Sovetov_Samara",
+    "filePage": "https://en.wikipedia.org/wiki/File:PFC_Krylia_Sovetov_Samara.svg"
+  },
+  "samsunspor": {
+    "name": "Самсунспор",
+    "file": "samsunspor.svg",
+    "page": "https://en.wikipedia.org/wiki/Samsunspor",
+    "filePage": "https://en.wikipedia.org/wiki/File:Samsunspor_crest.svg"
+  },
+  "nice": {
+    "name": "Ницца",
+    "file": "nice.svg",
+    "page": "https://en.wikipedia.org/wiki/OGC_Nice",
+    "filePage": "https://en.wikipedia.org/wiki/File:OGC_Nice_logo.svg"
+  },
+  "newcastle": {
+    "name": "Ньюкасл",
+    "file": "newcastle.svg",
+    "page": "https://en.wikipedia.org/wiki/Newcastle_United_F.C.",
+    "filePage": "https://en.wikipedia.org/wiki/File:Newcastle_United_FC_2026_crest.svg"
+  },
+  "celta": {
+    "name": "Сельта",
+    "file": "celta.svg",
+    "page": "https://en.wikipedia.org/wiki/RC_Celta_de_Vigo",
+    "filePage": "https://en.wikipedia.org/wiki/File:RC_Celta_de_Vigo_logo.svg"
+  },
+  "villarreal": {
+    "name": "Вильярреал",
+    "file": "villarreal.svg",
+    "page": "https://en.wikipedia.org/wiki/Villarreal_CF",
+    "filePage": "https://en.wikipedia.org/wiki/File:Villarreal_CF_logo-en.svg"
+  },
+  "aston-villa": {
+    "name": "Астон Вилла",
+    "file": "aston-villa.svg",
+    "page": "https://en.wikipedia.org/wiki/Aston_Villa_F.C.",
+    "filePage": "https://en.wikipedia.org/wiki/File:Aston_Villa_FC_new_crest.svg"
+  },
+  "dortmund": {
+    "name": "Боруссия Дортмунд",
+    "file": "dortmund.svg",
+    "page": "https://en.wikipedia.org/wiki/Borussia_Dortmund",
+    "filePage": "https://commons.wikimedia.org/wiki/File:Borussia_Dortmund_logo.svg"
+  },
+  "psv": {
+    "name": "ПСВ",
+    "file": "psv.svg",
+    "page": "https://en.wikipedia.org/wiki/PSV_Eindhoven",
+    "filePage": "https://en.wikipedia.org/wiki/File:PSV_Eindhoven.svg"
+  },
+  "lokomotiv": {
+    "name": "Локомотив",
+    "file": "lokomotiv.svg",
+    "page": "https://en.wikipedia.org/wiki/FC_Lokomotiv_Moscow",
+    "filePage": "https://en.wikipedia.org/wiki/File:FC_Lokomotiv_Moscow_logo.svg"
+  },
+  "sabah": {
+    "name": "Сабах",
+    "file": "sabah.svg",
+    "page": "https://en.wikipedia.org/wiki/Sabah_FK_(Azerbaijan)",
+    "filePage": "https://en.wikipedia.org/wiki/File:Sabah_FK_%28Azerbaijan%29_logo.svg"
+  },
+  "roma": {
+    "name": "Рома",
+    "file": "roma.svg",
+    "page": "https://en.wikipedia.org/wiki/AS_Roma",
+    "filePage": "https://en.wikipedia.org/wiki/File:AS_Roma_logo_%282017%29.svg"
+  },
+  "lorient": {
+    "name": "Лорьян",
+    "file": "lorient.svg",
+    "page": "https://en.wikipedia.org/wiki/FC_Lorient",
+    "filePage": "https://en.wikipedia.org/wiki/File:FC_Lorient_logo.svg"
+  },
+  "alaves": {
+    "name": "Алавес",
+    "file": "alaves.svg",
+    "page": "https://en.wikipedia.org/wiki/Deportivo_Alav%C3%A9s",
+    "filePage": "https://en.wikipedia.org/wiki/File:Deportivo_Alaves_logo_%282020%29.svg"
+  },
+  "krasnodar": {
+    "name": "Краснодар",
+    "file": "krasnodar.svg",
+    "page": "https://en.wikipedia.org/wiki/FC_Krasnodar",
+    "filePage": "https://en.wikipedia.org/wiki/File:FC_Krasnodar_logo.svg"
+  },
+  "deportivo": {
+    "name": "Депортиво",
+    "file": "deportivo.svg",
+    "page": "https://en.wikipedia.org/wiki/Deportivo_de_A_Coru%C3%B1a",
+    "filePage": "https://en.wikipedia.org/wiki/File:RC_Deportivo_A_Coru%C3%B1a_logo_2026.svg"
+  },
+  "man-city": {
+    "name": "Манчестер Сити",
+    "file": "man-city.svg",
+    "page": "https://en.wikipedia.org/wiki/Manchester_City_F.C.",
+    "filePage": "https://en.wikipedia.org/wiki/File:Manchester_City_FC_badge.svg"
+  },
+  "besiktas": {
+    "name": "Бешикташ",
+    "file": "besiktas.svg",
+    "page": "https://en.wikipedia.org/wiki/Be%C5%9Fikta%C5%9F_J.K.",
+    "filePage": "https://commons.wikimedia.org/wiki/File:BesiktasJK-Logo.svg"
+  },
+  "sociedad": {
+    "name": "Реал Сосьедад",
+    "file": "sociedad.svg",
+    "page": "https://en.wikipedia.org/wiki/Real_Sociedad",
+    "filePage": "https://en.wikipedia.org/wiki/File:Real_Sociedad_logo.svg"
+  },
+  "brentford": {
+    "name": "Брентфорд",
+    "file": "brentford.svg",
+    "page": "https://en.wikipedia.org/wiki/Brentford_F.C.",
+    "filePage": "https://en.wikipedia.org/wiki/File:Brentford_FC_crest.svg"
+  },
+  "atletico": {
+    "name": "Атлетико",
+    "file": "atletico.svg",
+    "page": "https://en.wikipedia.org/wiki/Atl%C3%A9tico_Madrid",
+    "filePage": "https://en.wikipedia.org/wiki/File:Atletico_Madrid_Logo_2024.svg"
+  },
+  "rizespor": {
+    "name": "Ризеспор",
+    "file": "rizespor.svg",
+    "page": "https://en.wikipedia.org/wiki/%C3%87aykur_Rizespor",
+    "filePage": "https://en.wikipedia.org/wiki/File:%C3%87aykur_Rizespor_logo.svg"
+  },
+  "toulouse": {
+    "name": "Тулуза",
+    "file": "toulouse.svg",
+    "page": "https://en.wikipedia.org/wiki/Toulouse_FC",
+    "filePage": "https://en.wikipedia.org/wiki/File:Toulouse_FC_2018_logo.svg"
+  },
+  "fakel": {
+    "name": "Факел",
+    "file": "fakel.png",
+    "page": "https://en.wikipedia.org/wiki/FC_Fakel_Voronezh",
+    "filePage": "https://en.wikipedia.org/wiki/File:FC_Fakel_Voronezh_logo.png"
+  },
+  "tottenham": {
+    "name": "Тоттенхэм",
+    "file": "tottenham.svg",
+    "page": "https://en.wikipedia.org/wiki/Tottenham_Hotspur_F.C.",
+    "filePage": "https://en.wikipedia.org/wiki/File:Tottenham_Hotspur.svg"
+  },
+  "athletic": {
+    "name": "Атлетик",
+    "file": "athletic.svg",
+    "page": "https://en.wikipedia.org/wiki/Athletic_Bilbao",
+    "filePage": "https://en.wikipedia.org/wiki/File:Club_Athletic_Bilbao_logo.svg"
+  },
+  "aek": {
+    "name": "АЕК",
+    "file": "aek.svg",
+    "page": "https://en.wikipedia.org/wiki/AEK_Athens_F.C.",
+    "filePage": "https://en.wikipedia.org/wiki/File:AEK_Athens_FC_logo.svg"
+  }
+}

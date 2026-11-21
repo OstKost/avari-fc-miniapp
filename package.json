@@ -1,0 +1,19 @@
+{
+  "name": "avarifc-webapp",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 43123 --strictPort",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 43123 --strictPort",
+    "schedule": "node scripts/csv-to-schedule.mjs",
+    "test": "node --test scripts/*.test.mjs"
+  },
+  "dependencies": {
+    "@fontsource/manrope": "^5.2.6"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}
